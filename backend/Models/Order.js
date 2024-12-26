@@ -8,7 +8,6 @@ const OrderSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
     },
     address: {
         type: String,
