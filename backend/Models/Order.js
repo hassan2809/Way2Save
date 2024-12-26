@@ -18,6 +18,10 @@ const OrderSchema = new Schema({
         type: String,
         required: true
     },
+    number: {
+        type: String,
+        required: true
+    },
     cart: [
         {
             title: { type: String, required: true },

@@ -232,7 +232,7 @@ const getProducts = async (req, res) => {
 const postOrder = async (req, res) => {
     try {
         // console.log(req.body)
-        const { name, email, address, paymentMethod, cart, totalCost } = req.body;
+        const { name, email, address, paymentMethod, cart, totalCost,number } = req.body;
         const newOrder = new OrderModel({
             name,
             email,
@@ -240,6 +240,7 @@ const postOrder = async (req, res) => {
             paymentMethod,
             cart,
             totalCost,
+            number
         });
         await newOrder.save();
 
@@ -247,6 +248,7 @@ const postOrder = async (req, res) => {
         New Order Received!
         Name: ${name}
         Email: ${email}
+        Contact Number: ${number}
         Address: ${address}
         Payment Method: ${paymentMethod}
         Total Cost: $${totalCost.toFixed(2)}
