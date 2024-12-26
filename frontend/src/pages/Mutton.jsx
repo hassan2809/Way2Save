@@ -22,7 +22,7 @@ const Mutton = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/auth/products/mutton');
+                const response = await axios.get('https://way2save.onrender.com/auth/products/mutton');
                 const productsWithQuantity = response.data.map(product => ({
                     ...product,
                     quantity: 1
@@ -133,7 +133,7 @@ const Mutton = () => {
                     {products.map((product) => (
                         <Card key={product._id} className="max-w-[300px] overflow-hidden border-0 border-white shadow-none">
                             <div className='h-[200px] bg-gray-100 rounded-t-lg'>
-                                <img src={`http://localhost:8000/uploads/${product.image_url}.jpg`} className="h-full w-full object-cover" alt="" />
+                                <img src={`https://way2save.onrender.com/uploads/${product.image_url}.jpg`} className="h-full w-full object-cover" alt="" />
                             </div>
                             <CardContent className="p-4 shadow-none">
                                 <div className="flex justify-between items-start mb-4">

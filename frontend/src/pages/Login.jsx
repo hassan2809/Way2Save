@@ -26,7 +26,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       // console.log(data)
-      const response = await axios.post("http://localhost:8000/auth/login", data);
+      const response = await axios.post("https://way2save.onrender.com/auth/login", data);
       if (response.data.success) {
         toast.success(response.data.message, {
           position: "top-right",

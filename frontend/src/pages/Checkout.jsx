@@ -60,7 +60,7 @@ const Checkout = () => {
                 totalCost,
             };
             console.log(orderData);
-            const response = await axios.post("http://localhost:8000/auth/order", orderData);
+            const response = await axios.post("https://way2save.onrender.com/auth/order", orderData);
             if (response.data.success) {
                 toast.success(response.data.message, {
                     position: "top-right",
@@ -203,7 +203,7 @@ const Checkout = () => {
                             {cart.map((item, index) => (
                                 <div key={index} className="flex items-center gap-4">
                                     <div className="w-20 h-20 bg-gray-100 rounded" >
-                                        <img src={`http://localhost:8000/uploads/${item.image_url}.jpg`} alt={item.title} className="h-full w-full" />
+                                        <img src={`https://way2save.onrender.com/uploads/${item.image_url}.jpg`} alt={item.title} className="h-full w-full" />
                                     </div>
                                     <div className="flex-1">
                                         <div className='flex justify-between'>
