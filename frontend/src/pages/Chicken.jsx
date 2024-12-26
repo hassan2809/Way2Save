@@ -9,12 +9,16 @@ import Footer from '../components/Footer'
 import { useCart } from "../context/CartContext";
 import Chicken1 from '../components/assets/chicken_1.jpg';
 import Chicken2 from '../components/assets/chicken_2.jpg';
+import { animateScroll as scroll } from 'react-scroll';
 
 const Chicken = () => {
     const [products, setProducts] = useState([]);
     const { cart, dispatch } = useCart();
     const [selectedProducts, setSelectedProducts] = useState(cart.map(item => item._id));
 
+    useEffect(() => {
+        scroll.scrollToTop();
+    }, []);
 
     useEffect(() => {
         const fetchProducts = async () => {

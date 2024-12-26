@@ -8,12 +8,16 @@ import Footer from '../components/Footer'
 import { useCart } from "../context/CartContext";
 import SeaFood1 from '../components/assets/seafood_1.jpg';
 import SeaFood2 from '../components/assets/seafood_2.jpg';
+import { animateScroll as scroll } from 'react-scroll';
 
 const SeaFood = () => {
     const [products, setProducts] = useState([]);
     const { cart, dispatch } = useCart();
     const [selectedProducts, setSelectedProducts] = useState(cart.map(item => item._id));
 
+    useEffect(() => {
+        scroll.scrollToTop();
+    }, []);
 
     useEffect(() => {
         const fetchProducts = async () => {
