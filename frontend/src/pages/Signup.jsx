@@ -27,7 +27,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       // console.log(data)
-      const response = await axios.post("http://localhost:8000/auth/signup", data);
+      const response = await axios.post("https://way2save.onrender.com/auth/signup", data);
       // console.log("Response:", response.data);
       // alert("Signup successful!");
 
