@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Beef from './assets/beef.png';
@@ -35,6 +35,19 @@ const Categories = () => {
             url : '/seaFood'
         },
     ];
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('https://way2save.onrender.com/auth/products/fresh fishes');
+                console.log('response')                
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     return (
         <section id="target-section" className="pt-16 px-4 md:px-16">
