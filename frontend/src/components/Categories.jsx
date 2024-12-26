@@ -6,6 +6,7 @@ import Chicken from './assets/chicken.png';
 import SeaFood from './assets/fishes.png';
 import Goat from './assets/goat.png';
 import Lamb from './assets/lamb.png';
+import axios from "axios";
 
 const Categories = () => {
     const categories = [
