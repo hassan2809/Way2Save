@@ -60,7 +60,7 @@ const Checkout = () => {
                 totalCost,
             };
             console.log(orderData);
-            const response = await axios.post("https://way2save.onrender.com/auth/order", orderData);
+            const response = await axios.post("http://localhost:8000/auth/order", orderData);
             if (response.data.success) {
                 toast.success(response.data.message, {
                     position: "top-right",
@@ -152,24 +152,43 @@ const Checkout = () => {
                             </div>
                             <div>
                                 <Label>Payment Method</Label>
-                                <RadioGroup defaultValue="cash">
-                                    <div className="flex items-center space-x-2 mt-2">
-                                        <RadioGroupItem value="cash" id="cash" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
+                                <div className="space-y-2 mt-2">
+                                    <div className="flex items-center space-x-2">
+                                        <input
+                                            type="radio"
+                                            id="cash"
+                                            value="cash"
+                                            {...register("paymentMethod", { required: "Please select a payment method" })}
+                                            className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black"
+                                        />
                                         <Label htmlFor="cash">Cash on Delivery</Label>
                                     </div>
-                                    <div className="flex items-center space-x-2 mt-2">
-                                        <RadioGroupItem value="card" id="card" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
+                                    <div className="flex items-center space-x-2 space-y-2">
+                                        <input
+                                            type="radio"
+                                            id="card"
+                                            value="card"
+                                            {...register("paymentMethod", { required: "Please select a payment method" })}
+                                            className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black"
+                                        />
                                         <Label htmlFor="card">Payment By Card</Label>
                                     </div>
-                                    <div className="flex items-center space-x-2 mt-2">
-                                        <RadioGroupItem value="bank_transfer" id="bank_transfer" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
+                                    <div className="flex items-center space-x-2 space-y-2">
+                                        <input
+                                            type="radio"
+                                            id="bank_transfer"
+                                            value="bank_transfer"
+                                            {...register("paymentMethod", { required: "Please select a payment method" })}
+                                            className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-white"
+                                        />
                                         <Label htmlFor="bank_transfer">Payment Through Bank Transfer</Label>
                                     </div>
-                                </RadioGroup>
+                                </div>
                                 {errors.paymentMethod && (
                                     <p className="text-red-500 text-sm mt-1">{errors.paymentMethod.message}</p>
                                 )}
                             </div>
+
                             <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-jost" disabled={cart.length === 0}>
                                 Place Order
                             </Button>
@@ -184,7 +203,7 @@ const Checkout = () => {
                             {cart.map((item, index) => (
                                 <div key={index} className="flex items-center gap-4">
                                     <div className="w-20 h-20 bg-gray-100 rounded" >
-                                        <img src={`https://way2save.onrender.com/uploads/${item.image_url}.jpg`} alt={item.title} className="h-full w-full" />
+                                        <img src={`http://localhost:8000/uploads/${item.image_url}.jpg`} alt={item.title} className="h-full w-full" />
                                     </div>
                                     <div className="flex-1">
                                         <div className='flex justify-between'>

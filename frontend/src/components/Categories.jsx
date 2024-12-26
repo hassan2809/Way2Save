@@ -40,7 +40,7 @@ const Categories = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://way2save.onrender.com/auth/products/fresh fishes');
+                const response = await axios.get('http://localhost:8000/auth/products/fresh fishes');
                 console.log('response')                
             } catch (error) {
                 console.error('Error fetching products:', error);

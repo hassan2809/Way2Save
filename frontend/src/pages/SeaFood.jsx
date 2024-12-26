@@ -22,8 +22,8 @@ const SeaFood = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response_1 = await axios.get('https://way2save.onrender.com/auth/products/fresh fishes');
-                const response_2 = await axios.get('https://way2save.onrender.com/auth/products/frozen fish');
+                const response_1 = await axios.get('http://localhost:8000/auth/products/fresh fishes');
+                const response_2 = await axios.get('http://localhost:8000/auth/products/frozen fish');
                 const response = [...response_1.data, ...response_2.data];
                 const productsWithQuantity = response.map(product => ({
                     ...product,
@@ -135,7 +135,7 @@ const SeaFood = () => {
                     {products.map((product) => (
                         <Card key={product._id} className="max-w-[300px] overflow-hidden border-0 border-white shadow-none">
                             <div className='h-[200px] bg-gray-100 rounded-t-lg'>
-                                <img src={`https://way2save.onrender.com/uploads/${product.image_url}.jpg`} className="h-full w-full object-cover" alt="" />
+                                <img src={`http://localhost:8000/uploads/${product.image_url}.jpg`} className="h-full w-full object-cover" alt="" />
                             </div>
                             <CardContent className="p-4 shadow-none">
                                 <div className="flex justify-between items-start mb-4">
