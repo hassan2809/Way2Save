@@ -115,7 +115,6 @@ const Checkout = () => {
                                 <Label htmlFor="email">Email</Label>
                                 <Input id="email" name="email" type="email"
                                     {...register("email", {
-                                        required: "Email is required",
                                         pattern: {
                                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                                             message: "Enter a valid email address",
@@ -124,6 +123,18 @@ const Checkout = () => {
                                 {errors.email && (
                                     <p className="text-red-500 text-sm mt-1">
                                         {errors.email.message}
+                                    </p>
+                                )}
+                            </div>
+                            <div>
+                                <Label htmlFor="number">Contact Number</Label>
+                                <Input id="number" name="number"
+                                    {...register("number", {
+                                        required: "Contact Number is required",
+                                    })} />
+                                {errors.number && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.number.message}
                                     </p>
                                 )}
                             </div>
@@ -145,6 +156,14 @@ const Checkout = () => {
                                     <div className="flex items-center space-x-2 mt-2">
                                         <RadioGroupItem value="cash" id="cash" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
                                         <Label htmlFor="cash">Cash on Delivery</Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2 mt-2">
+                                        <RadioGroupItem value="card" id="card" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
+                                        <Label htmlFor="card">Payment By Card</Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2 mt-2">
+                                        <RadioGroupItem value="bank_transfer" id="bank_transfer" {...register("paymentMethod", { required: "Please select a payment method" })} className="appearance-none rounded-full w-5 h-5 border border-gray-400 checked:bg-black checked:border-black" type='radio' />
+                                        <Label htmlFor="bank_transfer">Payment Through Bank Transfer</Label>
                                     </div>
                                 </RadioGroup>
                                 {errors.paymentMethod && (
@@ -206,15 +225,15 @@ const Checkout = () => {
                             <div className="space-y-2 mb-4">
                                 <div className="flex justify-between">
                                     <span className="font-jost">Total Product ({cart.length})</span>
-                                    <span className="font-jost">${totalProduct}</span>
+                                    <span className="font-jost">£{totalProduct}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="font-jost">Shipping Cost</span>
-                                    <span className="font-jost">${shippingCost}</span>
+                                    <span className="font-jost">£{shippingCost}</span>
                                 </div>
                                 <div className="flex justify-between font-semibold text-lg">
                                     <span className="font-jost">Total Cost</span>
-                                    <span className="font-jost">${totalCost}</span>
+                                    <span className="font-jost">£{totalCost}</span>
                                 </div>
                             </div>
                             <p className="text-center text-sm text-gray-500 mt-2 font-jost">Payment Processed Securely</p>
