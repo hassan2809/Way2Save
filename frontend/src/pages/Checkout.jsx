@@ -33,7 +33,7 @@ const Checkout = () => {
 
     const calculateTotal = () => {
         const totalProduct = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
-        const shippingCost = cart.length != 0 ? 10.00 : 0;
+        const shippingCost = parseFloat(totalProduct) < 20 && cart.length !== 0 ? 2.99 : 0;
         const totalCost = (parseFloat(totalProduct) + shippingCost).toFixed(2);
 
         return {
@@ -59,7 +59,7 @@ const Checkout = () => {
                 cart,
                 totalCost,
             };
-            console.log(orderData);
+            // console.log(orderData);
             const response = await axios.post("https://way2save.onrender.com/auth/order", orderData);
             if (response.data.success) {
                 toast.success(response.data.message, {
@@ -246,9 +246,19 @@ const Checkout = () => {
                                     <span className="font-jost">Total Product ({cart.length})</span>
                                     <span className="font-jost">£{totalProduct}</span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="font-jost">Shipping Cost</span>
-                                    <span className="font-jost">£{shippingCost}</span>
+                                <div>
+                                    <div className="flex justify-between">
+                                        <span className="font-jost">Delivery Charges</span>
+                                        <span className="font-jost">£{shippingCost}</span>
+                                    </div>
+                                    {totalCost < 20 && (
+                                        <div className='text-xs text-red-600'>
+                                            <span className=''>* </span>
+                                            <span>
+                                                Delivery fees of £2.99 apply for orders under £20. Orders £20 and above enjoy free delivery.
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex justify-between font-semibold text-lg">
                                     <span className="font-jost">Total Cost</span>

@@ -32,6 +32,10 @@ const OrderSchema = new Schema({
         type: Number,
         required: true
     },
+    orderNumber: {
+        type: Number,
+        required: true
+    },
 })
 
 const OrderModel = mongoose.model("orders", OrderSchema)

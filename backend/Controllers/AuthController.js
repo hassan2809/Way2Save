@@ -232,7 +232,8 @@ const getProducts = async (req, res) => {
 const postOrder = async (req, res) => {
     try {
         // console.log(req.body)
-        const { name, email, address, paymentMethod, cart, totalCost,number } = req.body;
+        const { name, email, address, paymentMethod, cart, totalCost, number } = req.body;
+        const orderNumber = Math.floor(100000 + Math.random() * 900000);
         const newOrder = new OrderModel({
             name,
             email,
@@ -240,12 +241,14 @@ const postOrder = async (req, res) => {
             paymentMethod,
             cart,
             totalCost,
-            number
+            number,
+            orderNumber
         });
         await newOrder.save();
 
         const orderDetails = `
         New Order Received!
+        Order Number: ${orderNumber}
         Name: ${name}
         Email: ${email}
         Contact Number: ${number}
