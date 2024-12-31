@@ -279,11 +279,11 @@ const postOrder = async (req, res) => {
 
         var mailOptions = {
             from: process.env.NODEMAILER_EMAIL,
-            to: 'chaudahryhassan786@gmail.com',
+            to: 'waysavebutchers@gmail.com',
             subject: 'New Order Received - Order Details',
             html: `
                 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                    <h2 style="color: #4CAF50;">Order Details</h2>
+                    <h2 style="color: #4CAF50; text-align: center;">Order Details</h2>
                     <p><strong>Order Number:</strong> ${orderNumber}</p>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
