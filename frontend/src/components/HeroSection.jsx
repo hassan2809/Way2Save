@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 // import Image from './assets/home.jpg';
 import Image from './assets/2.jpg';
 import { Link } from 'react-scroll';
+import { MdOutlineArrowDownward } from "react-icons/md";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const HeroSection = () => {
   return (
@@ -27,7 +29,8 @@ const HeroSection = () => {
             className='rounded-3xl bg-[#E31244] hover:bg-[#E31244]'
           >
             See Our Collection
-            <span className="ml-2">→</span>
+            {/* <span className="ml-2"><MdOutlineArrowDownward /></span> */}
+            <span className="ml-2"><FaArrowRightLong /></span>
           </Button>
         </Link>
       </div>

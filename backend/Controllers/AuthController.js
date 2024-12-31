@@ -254,10 +254,10 @@ const postOrder = async (req, res) => {
         Contact Number: ${number}
         Address: ${address}
         Payment Method: ${paymentMethod}
-        Total Cost: $${totalCost.toFixed(2)}
+        Total Cost: £${totalCost.toFixed(2)}
 
         Items:
-        ${cart.map(item => `  - ${item.title} (${item.quantity} Kg): $${(item.price * item.quantity).toFixed(2)}`).join('\n')}
+        ${cart.map(item => `  - ${item.title} (${item.quantity} Kg): £${(item.price * item.quantity).toFixed(2)}`).join('\n')}
         `;
 
         client.messages.create({
@@ -268,6 +268,44 @@ const postOrder = async (req, res) => {
             .then(message => console.log(message.sid))
             .catch(error => console.error(`Failed to send message: ${error.message}`));
 
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.NODEMAILER_EMAIL,
+                pass: process.env.NODEMAILER_PASSWORD
+            }
+        });
+
+        var mailOptions = {
+            from: process.env.NODEMAILER_EMAIL,
+            to: 'chaudahryhassan786@gmail.com',
+            subject: 'New Order Received - Order Details',
+            html: `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <h2 style="color: #4CAF50;">Order Details</h2>
+                    <p><strong>Order Number:</strong> ${orderNumber}</p>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Contact Number:</strong> ${number}</p>
+                    <p><strong>Address:</strong> ${address}</p>
+                    <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                    <p><strong>Total Cost:</strong> £${totalCost.toFixed(2)}</p>
+                    <h3>Items:</h3>
+                    <ul>
+                        ${cart.map(item => `<li>${item.title} (${item.quantity} Kg): £${(item.price * item.quantity).toFixed(2)}</li>`).join('')}
+                    </ul>
+                </div>
+            `
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
 
         res.status(201).json({ success: true, message: 'Order placed successfully!' });
     }
