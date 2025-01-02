@@ -48,7 +48,7 @@ const Checkout = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         reset
     } = useForm();
 
@@ -189,9 +189,21 @@ const Checkout = () => {
                                 )}
                             </div>
 
-                            <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-jost" disabled={cart.length === 0}>
-                                Place Order
-                            </Button>
+                            <div className="relative group">
+                                <Button
+                                    type="submit"
+                                    className={`w-full bg-red-500 hover:bg-red-600 text-white font-jost ${cart.length === 0 ? "cursor-not-allowed" : ""
+                                        }`}
+                                    disabled={cart.length === 0 || isSubmitting}
+                                >
+                                    {isSubmitting ? "Placing Order..." : "Place Order"}
+                                </Button>
+                                {cart.length === 0 && (
+                                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-sm rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                        Please select products first
+                                    </div>
+                                )}
+                            </div>
                         </form>
                     </div>
                     <div className="flex-1 flex-col h-full overflow-auto">

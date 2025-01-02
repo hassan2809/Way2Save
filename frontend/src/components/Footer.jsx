@@ -53,7 +53,7 @@ const Footer = () => {
                     {/* Logo and Subscribe Column - 4 columns wide for better centering */}
                     <div className="col-span-2 lg:col-span-4">
                         <div className="text-center mb-6">
-                            <h2 className="text-xl font-bold">MEAT<span className="text-red-500">FIT</span></h2>
+                            <h2 className="text-xl font-bold">Way2<span className="text-red-500">Save</span></h2>
                             <p className="text-sm text-gray-400">A Trusted Meat Shop</p>
                         </div>
                         <div className="max-w-xs mx-auto">
