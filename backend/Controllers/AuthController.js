@@ -363,7 +363,23 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const getAllOrders = async (req, res) => {
+    try {
+        const orders = await OrderModel.find().sort({ createdAt: -1 });
+
+        if (orders.length === 0) {
+            return res.status(404).json({ message: `No orders found.` });
+        }
+
+        res.json(orders);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Erorr...", success: false })
+    }
+}
+
+
 
 module.exports = {
-    signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder, getAllProducts,addProduct,updateProduct,deleteProduct
+    signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder, getAllProducts, addProduct, updateProduct, deleteProduct, getAllOrders
 }

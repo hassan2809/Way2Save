@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { ToastContainer, toast } from 'react-toastify';
 import AdminNavbar from "../components/AdminNavbar";
+import AdminOrders from "./AdminOrders";
 
 const API_URL = "https://way2save.onrender.com/auth/admin/products";
 
@@ -28,6 +29,7 @@ const AdminProducts = () => {
     const [categories, setCategories] = useState(["chicken", "Baby Lamb", "mutton", "beef", "frozen fish", "fresh fishes"]);
     const [newProduct, setNewProduct] = useState({ title: "", price: "", category: "" });
     const [editingProduct, setEditingProduct] = useState(null);
+    const [activeTab, setActiveTab] = useState("products");
 
     useEffect(() => {
         fetchProducts();
@@ -160,125 +162,149 @@ const AdminProducts = () => {
 
     return (
         <div>
-            <AdminNavbar/>
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Admin Panel - Products</h1>
+            <AdminNavbar />
+            <div className="flex justify-center my-4">
+                <Button
+                    className={`mr-2 ${activeTab === "products" ? "bg-[#E31244] text-white" : "bg-gray-200"}`}
+                    onClick={() => setActiveTab("products")}
+                >
+                    Products
+                </Button>
+                <Button
+                    className={`${activeTab === "orders" ? "bg-[#E31244] text-white" : "bg-gray-200"}`}
+                    onClick={() => setActiveTab("orders")}
+                >
+                    Orders
+                </Button>
+            </div>
 
-            {/* Add Product Dialog */}
-            <Dialog>
-                <DialogTrigger asChild>
-                    <Button className="mb-4">
-                        <Plus className="mr-2 h-4 w-4" /> Add Product
-                    </Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Add New Product</DialogTitle>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <Input
-                            placeholder="Product Name"
-                            value={newProduct.title}
-                            onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
-                        />
-                        <select
-                            className="border rounded px-3 py-2"
-                            value={newProduct.category}
-                            onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-                        >
-                            <option value="">Select Category</option>
-                            {categories.map((category, index) => (
-                                <option key={index} value={category} className="capitalize">
-                                    {category}
-                                </option>
-                            ))}
-                        </select>
-                        <Input
-                            type="number"
-                            placeholder="Price"
-                            value={newProduct.price}
-                            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-                        />
-                        <Button onClick={handleAddProduct}>Add Product</Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            <div className="mt-4">
+                {activeTab === "products" && (
+                    <div className="container mx-auto p-4">
+                        <h1 className="text-2xl font-bold mb-4">Admin Panel - Products</h1>
 
-            {/* Products Table */}
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Category</TableHead>
-                        <TableHead>Price</TableHead>
-                        <TableHead>Actions</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {products.map((product) => (
-                        <TableRow key={product._id}>
-                            <TableCell className='capitalize'>{product.title}</TableCell>
-                            <TableCell className='capitalize'>{product.category}</TableCell>
-                            <TableCell>£{product.price}</TableCell>
-                            <TableCell>
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <Button
-                                            variant="outline"
-                                            size="icon"
-                                            className="mr-2"
-                                            onClick={() => setEditingProduct(product)}
-                                        >
-                                            <Pencil className="h-4 w-4" />
-                                        </Button>
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <DialogHeader>
-                                            <DialogTitle>Edit Product</DialogTitle>
-                                        </DialogHeader>
-                                        <div className="grid gap-4 py-4">
-                                            <Input
-                                                placeholder="Product Name"
-                                                value={editingProduct?.title || ""}
-                                                onChange={(e) =>
-                                                    setEditingProduct({ ...editingProduct, title: e.target.value })
-                                                }
-                                            />
-                                            <select
-                                                className="border rounded px-3 py-2"
-                                                value={editingProduct?.category || ""}
-                                                onChange={(e) =>
-                                                    setEditingProduct({ ...editingProduct, category: e.target.value })
-                                                }
-                                            >
-                                                <option value="">Select Category</option>
-                                                {categories.map((category, index) => (
-                                                    <option key={index} value={category}>
-                                                        {category}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            <Input
-                                                type="number"
-                                                placeholder="Price"
-                                                value={editingProduct?.price || ""}
-                                                onChange={(e) =>
-                                                    setEditingProduct({ ...editingProduct, price: e.target.value })
-                                                }
-                                            />
-                                            <Button onClick={handleUpdateProduct}>Update Product</Button>
-                                        </div>
-                                    </DialogContent>
-                                </Dialog>
-                                <Button variant="outline" size="icon" onClick={() => handleDeleteProduct(product._id)}>
-                                    <Trash2 className="h-4 w-4" />
+                        {/* Add Product Dialog */}
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button className="mb-4">
+                                    <Plus className="mr-2 h-4 w-4" /> Add Product
                                 </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </div>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Add New Product</DialogTitle>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                    <Input
+                                        placeholder="Product Name"
+                                        value={newProduct.title}
+                                        onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
+                                    />
+                                    <select
+                                        className="border rounded px-3 py-2"
+                                        value={newProduct.category}
+                                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                                    >
+                                        <option value="">Select Category</option>
+                                        {categories.map((category, index) => (
+                                            <option key={index} value={category} className="capitalize">
+                                                {category}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <Input
+                                        type="number"
+                                        placeholder="Price"
+                                        value={newProduct.price}
+                                        onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                                    />
+                                    <Button onClick={handleAddProduct}>Add Product</Button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+
+                        {/* Products Table */}
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Name</TableHead>
+                                    <TableHead>Category</TableHead>
+                                    <TableHead>Price</TableHead>
+                                    <TableHead>Actions</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {products.map((product) => (
+                                    <TableRow key={product._id}>
+                                        <TableCell className='capitalize'>{product.title}</TableCell>
+                                        <TableCell className='capitalize'>{product.category}</TableCell>
+                                        <TableCell>£{product.price}</TableCell>
+                                        <TableCell>
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <Button
+                                                        variant="outline"
+                                                        size="icon"
+                                                        className="mr-2"
+                                                        onClick={() => setEditingProduct(product)}
+                                                    >
+                                                        <Pencil className="h-4 w-4" />
+                                                    </Button>
+                                                </DialogTrigger>
+                                                <DialogContent>
+                                                    <DialogHeader>
+                                                        <DialogTitle>Edit Product</DialogTitle>
+                                                    </DialogHeader>
+                                                    <div className="grid gap-4 py-4">
+                                                        <Input
+                                                            placeholder="Product Name"
+                                                            value={editingProduct?.title || ""}
+                                                            onChange={(e) =>
+                                                                setEditingProduct({ ...editingProduct, title: e.target.value })
+                                                            }
+                                                        />
+                                                        <select
+                                                            className="border rounded px-3 py-2"
+                                                            value={editingProduct?.category || ""}
+                                                            onChange={(e) =>
+                                                                setEditingProduct({ ...editingProduct, category: e.target.value })
+                                                            }
+                                                        >
+                                                            <option value="">Select Category</option>
+                                                            {categories.map((category, index) => (
+                                                                <option key={index} value={category}>
+                                                                    {category}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <Input
+                                                            type="number"
+                                                            placeholder="Price"
+                                                            value={editingProduct?.price || ""}
+                                                            onChange={(e) =>
+                                                                setEditingProduct({ ...editingProduct, price: e.target.value })
+                                                            }
+                                                        />
+                                                        <Button onClick={handleUpdateProduct}>Update Product</Button>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+                                            <Button variant="outline" size="icon" onClick={() => handleDeleteProduct(product._id)}>
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                )}
+                {activeTab === "orders" && (
+                    <div>
+                        <AdminOrders/>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

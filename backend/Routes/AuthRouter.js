@@ -1,4 +1,4 @@
-const { signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder, getAllProducts, addProduct, updateProduct, deleteProduct} = require("../Controllers/AuthController");
+const { signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder, getAllProducts, addProduct, updateProduct, deleteProduct, getAllOrders } = require("../Controllers/AuthController");
 const ensureAuthenticated = require("../Middlewares/Auth");
 const { signupValidation, loginValidation } = require("../Middlewares/AuthValidation");
 const upload = require("../Middlewares/ImageUploading");
@@ -20,6 +20,7 @@ router.get("/admin/products", getAllProducts)
 router.post("/admin/products/addProduct", addProduct)
 router.put("/admin/products/:id", updateProduct)
 router.delete("/admin/products/:id", deleteProduct)
+router.get("/admin/orders", getAllOrders)
 router.post("/order", postOrder)
 
 module.exports = router
