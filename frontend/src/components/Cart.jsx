@@ -103,7 +103,7 @@ const Cart = () => {
               <span className="font-jost">Delivery Charges</span>
               <span className="font-jost">£{shippingCost}</span>
             </div>
-            {totalCost < 20 && (
+            {totalProduct < 20 && (
               <div className='text-xs text-red-600'>
                 <span className=''>* </span>
                 <span>

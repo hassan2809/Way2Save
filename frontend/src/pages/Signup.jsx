@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cities from '../components/assets/cities.jpg';
-import SignupImage from '../components/assets/signup.jpg';
+import SignupImage from '../components/assets/adminPanel.jpg';
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';

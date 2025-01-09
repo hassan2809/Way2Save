@@ -9,6 +9,11 @@ import Beef from './pages/Beef';
 import Lamb from './pages/Lamb';
 import Mutton from './pages/Mutton';
 import SeaFood from './pages/SeaFood';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import AdminProducts from './pages/AdminProducts';
+import EditProfile from './components/EditProfile';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -37,11 +42,20 @@ function App() {
           <Route path="/seaFood" element={
             <SeaFood />
           } />
-          {/* <Route path="/room-listing" element={
-            <ProtectedRoute>
-              <RoomListingPage />
-            </ProtectedRoute>
+          <Route path="/admin" element={
+            <Login />
+          } />
+          {/* <Route path="/admin/products" element={
+            <AdminProducts />
           } /> */}
+          <Route path="/edit-profile" element={
+            <EditProfile />
+          } />
+          <Route path="/admin/products" element={
+            <ProtectedRoute>
+              <AdminProducts />
+            </ProtectedRoute>
+          } />
         </Routes>
       </Router>
     </div>

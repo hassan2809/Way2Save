@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer")
 const UserModel = require("../Models/User");
 const RoomListingModel = require("../Models/RoomListing");
 const TourModel = require("../Models/Tour");
-const ProducModel = require("../Models/Products");
+const ProductModel = require("../Models/Products");
 const OrderModel = require("../Models/Order");
 require('dotenv').config();
 
@@ -216,7 +216,7 @@ const resetPassword = async (req, res) => {
 const getProducts = async (req, res) => {
     try {
         const { category } = req.params;
-        const products = await ProducModel.find({ category: category });
+        const products = await ProductModel.find({ category: category });
 
         if (products.length === 0) {
             return res.status(404).json({ message: `No products found in the ${category} category.` });
@@ -315,7 +315,55 @@ const postOrder = async (req, res) => {
     }
 }
 
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await ProductModel.find();
+
+        if (products.length === 0) {
+            return res.status(404).json({ message: `No products found in the ${category} category.` });
+        }
+
+        res.json(products);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Erorr...", success: false })
+    }
+}
+
+const addProduct = async (req, res) => {
+    try {
+        // console.log(req.body)
+        const product = new ProductModel(req.body);
+        await product.save();
+        res.status(201).json({ success: true, message: "Product is added successfully!" });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Erorr...", success: false })
+    }
+}
+
+const updateProduct = async (req, res) => {
+    try {
+        // console.log(req.body)
+        const product = await ProductModel.findByIdAndUpdate(req.params.id, req.body);
+        res.status(201).json({ success: true, message: "Product is updated successfully!" });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Erorr...", success: false })
+    }
+}
+
+const deleteProduct = async (req, res) => {
+    try {
+        await ProductModel.findByIdAndDelete(req.params.id);
+        res.status(201).json({ success: true, message: "Product is deleted successfully!" });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Erorr...", success: false })
+    }
+}
+
 
 module.exports = {
-    signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder
+    signup, login, filterRoomListings, fetchUserDetails, updateUserDetails, forgotPassword, resetPassword, getProducts, postOrder, getAllProducts,addProduct,updateProduct,deleteProduct
 }

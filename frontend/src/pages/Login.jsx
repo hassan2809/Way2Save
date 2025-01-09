@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cities from "../components/assets/cities.jpg";
-import LoginImage from "../components/assets/login.jpg";
+import LoginImage from "../components/assets/adminPanel.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
@@ -41,7 +41,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.jwtToken);
         localStorage.setItem("name", response.data.name);
         localStorage.setItem("email", response.data.email);
-        navigate("/");
+        navigate("/admin/products");
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -63,36 +63,13 @@ const Login = () => {
       <div className="flex flex-col justify-center text-center h-screen w-full md:w-1/2 bg-gray-100 px-8 md:px-20 lg:px-40">
         {/* Logo */}
         <div className="mb-8">
-          <h1 className="text-xl font-bold text-green-600">TripMate</h1>
+          <h1 className="text-4xl font-bold text-[#E31244] font-jost">Way2Save Admin Panel</h1>
         </div>
 
         {/* Sign-in Form */}
         <div>
           <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
           <p className="text-gray-600 mt-2 mb-10">Login into your account</p>
-
-          {/* Social Login Buttons */}
-          {/* <div className="mt-6 flex gap-4">
-            <Button variant="outline" className="w-1/2">
-              <FcGoogle className="h-5 w-5 mr-2" />
-              Google
-            </Button>
-            <Button variant="outline" className="w-1/2">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                alt="Facebook"
-                className="h-5 w-5 mr-2"
-              />
-              Facebook
-            </Button>
-          </div> */}
-
-          {/* Divider */}
-          {/* <div className="flex items-center my-6">
-            <hr className="flex-grow border-gray-300" />
-            <span className="mx-4 text-gray-500">Or continue with</span>
-            <hr className="flex-grow border-gray-300" />
-          </div> */}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -147,11 +124,7 @@ const Login = () => {
             </div>
 
             <div className="flex items-center justify-end mb-6">
-              {/* <label className="flex items-center text-sm text-gray-600">
-                <input type="checkbox" className="mr-2" />
-                Remember me
-              </label> */}
-              <ForgotPassword  />
+              {/* <ForgotPassword  /> */}
             </div>
 
             <Button type="submit" className="w-full">
@@ -160,12 +133,12 @@ const Login = () => {
           </form>
 
           {/* Sign Up Link */}
-          <p className="text-center text-gray-600 text-sm mt-6">
+          {/* <p className="text-center text-gray-600 text-sm mt-6">
             Don't have an account?{" "}
             <Link to="/signup" className="text-green-500 font-medium hover:underline">
               Sign up!
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
 
