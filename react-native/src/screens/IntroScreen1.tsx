@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Intro2Image from '../../assets/images/accommodation.jpg';
+import Intro2Image from '../../assets/images/intro_1.jpg';
 
 const { width, height } = Dimensions.get('window');
 

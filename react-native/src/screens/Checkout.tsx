@@ -57,7 +57,7 @@ const Checkout = () => {
         },
     });
 
-    const FormInput = ({ label, name, rules, keyboardType = 'default', error }) => (
+    const FormInput = ({ label, name, rules, error }) => (
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{label}</Text>
             <Controller
@@ -69,7 +69,6 @@ const Checkout = () => {
                         style={[styles.input, error && styles.inputError]}
                         onChangeText={onChange}
                         value={value}
-                        keyboardType={keyboardType}
                     />
                 )}
             />
@@ -164,7 +163,7 @@ const Checkout = () => {
                         <Text style={styles.totalText}>Total Cost</Text>
                         <Text style={styles.totalText}>£{totalCost}</Text>
                     </View>
-                    <Text style={styles.securePaymentText}>Payment Processed Securely</Text>
+                    {/* <Text style={styles.securePaymentText}>Payment Processed Securely</Text> */}
                 </View>
 
                 <View style={styles.form}>
@@ -366,7 +365,7 @@ const styles = StyleSheet.create({
     },
     totalRow: {
         marginTop: 8,
-        marginBottom: 16,
+        // marginBottom: 16,
     },
     totalText: {
         fontSize: 18,
