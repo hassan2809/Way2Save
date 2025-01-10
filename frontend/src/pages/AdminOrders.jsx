@@ -65,6 +65,7 @@ const AdminOrders = () => {
                         <TableHead>Cart Items</TableHead>
                         <TableHead>Payment Method</TableHead>
                         <TableHead>Total Amount</TableHead>
+                        <TableHead>Order Created</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -84,6 +85,17 @@ const AdminOrders = () => {
                             </TableCell>
                             <TableCell className='capitalize'>{order.paymentMethod}</TableCell>
                             <TableCell>£{order.totalCost}</TableCell>
+                            <TableCell>
+                                {new Date(order.createdAt).toLocaleString('en-GB', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit',
+                                    hour12: true,
+                                })}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
