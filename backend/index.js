@@ -58,9 +58,9 @@ app.use("/auth", AuthRouter);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist')));
 
-  // Catch-all route to handle any frontend route and serve index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+  // PATH CONFIGURATION TO RESPOND TO A REQUEST TO STATIC ROUTE REQUEST BY SERVING index.html
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 } else {
   app.get('/', (req, res) => {
