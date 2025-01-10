@@ -19,11 +19,12 @@ const EditProfile = () => {
         handleSubmit,
         setValue,
         watch,
+        reset,
         formState: { errors },
     } = useForm();
     // let initials;
     const [initials, setInitials] = useState("");
-    const currentPassword=watch("currentPassword")
+    const currentPassword = watch("currentPassword")
 
     const fetchUserDetails = async () => {
         const token = localStorage.getItem("token");
@@ -63,8 +64,10 @@ const EditProfile = () => {
                     progress: undefined,
                     theme: "light",
                 });
+                setValue("currentPassword", "");
+                setValue("newPassword", "");
                 localStorage.removeItem('name')
-                localStorage.setItem('name',data.name)
+                localStorage.setItem('name', data.name)
             }
             else {
                 // console.log("eroorororo")
